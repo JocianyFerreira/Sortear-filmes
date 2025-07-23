@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Roleta de Filmes Premiadas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    button {
+      background: #1db954;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #17a144;
+    }
+    #filme-sorteado {
+      background: #222;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 15px #1db954aa;
+    }
+    #filme-sorteado img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+    #filme-sorteado h2 {
+      margin: 0 0 8px;
+    }
+    #filme-sorteado p {
+      margin: 6px 0;
+    }
+    #filme-sorteado a {
+      color: #1db954;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    #filme-sorteado a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 480px) {
+      #filme-sorteado {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Roleta de Filmes Premiadas (2015–2024)</h1>
+  <button onclick="sortearFilme()">Sortear Filme</button>
+
+  <div id="filme-sorteado" style="display:none;">
+    <img id="poster" src="" alt="Poster do filme" />
+    <h2 id="titulo"></h2>
+    <p id="ano-premio"></p>
+    <p id="onde-assistir"></p>
+    <p><a id="link-trailer" href="" target="_blank" rel="noopener noreferrer">🎥 Assistir trailer</a></p>
+  </div>
+
+  <script>
+    const filmes = [
+      				
+    {
+    titulo: "Parasita",
+    ano: 2019,
+    premio: "Oscar de Melhor Filme 2020",
+    poster: "https://m.media-amazon.com/images/I/91E3FG5h3KL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=5xH0HfJHsaY"
+  },
+  {
+    titulo: "Roma",
+    ano: 2018,
+    premio: "Oscar de Melhor Filme Estrangeiro 2019",
+    poster: "https://m.media-amazon.com/images/I/71tLlYLDsGL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=6BSxj9IAuXM"
+  },
+  {
+    titulo: "A Forma da Água",
+    ano: 2017,
+    premio: "Oscar de Melhor Filme 2018",
+    poster: "https://m.media-amazon.com/images/I/81G6qlI2tUL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=XFYWazblaUA"
+  },
+    {
+    titulo: "Birdman",
+    ano: 2014,
+    premio: "Oscar de Melhor Filme 2015",
+    poster: "https://m.media-amazon.com/images/I/81-1ok9GfEL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=uJfLoE6hanc"
+  },
+  {
+    titulo: "La La Land: Cantando Estações",
+    ano: 2016,
+    premio: "Oscar de Melhor Diretor 2017",
+    poster: "https://m.media-amazon.com/images/I/81g7wWJqZbL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=0pdqf4P9MB8"
+  },
+  {
+    titulo: "Moonlight: Sob a Luz do Luar",
+    ano: 2016,
+    premio: "Oscar de Melhor Filme 2017",
+    poster: "https://m.media-amazon.com/images/I/81RbHXD3YwL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=9NJj12tJz52"
+  },
+  {
+    titulo: "O Grande Hotel Budapeste",
+    ano: 2014,
+    premio: "Oscar de Melhor Direção de Arte 2015",
+    poster: "https://m.media-amazon.com/images/I/81FG75jShPL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=1Fg5iWmQjwk"
+  },
+  {
+    titulo: "Spotlight: Segredos Revelados",
+    ano: 2015,
+    premio: "Oscar de Melhor Filme 2016",
+    poster: "https://m.media-amazon.com/images/I/81IFD+8N-nL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=EwdCIpbTN5g"
+  },
+    			
+  {
+    titulo: "Manchester à Beira-Mar",
+    ano: 2016,
+    premio: "Oscar de Melhor Ator 2017",
+    poster: "https://m.media-amazon.com/images/I/81ZrDrY5pjL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=Gl7sw4T_FK8"
+  },
+  {
+    titulo: "A Grande Beleza",
+    ano: 2013,
+    premio: "Oscar de Melhor Filme Estrangeiro 2014",
+    poster: "https://m.media-amazon.com/images/I/71bUJ6FY6SL._AC_SY679_.jpg",
+    ondeAssistir: "MUBI Brasil",
+    trailer: "https://www.youtube.com/watch?v=BNu3HGwt6Fo"
+  },
+  {
+    titulo: "Django Livre",
+    ano: 2012,
+    premio: "Oscar de Melhor Ator Coadjuvante 2013",
+    poster: "https://m.media-amazon.com/images/I/81K9KqCZgHL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=eUdM9vrCbow"
+  },
+  {
+    titulo: "Coringa",
+    ano: 2019,
+    premio: "Leão de Ouro em Veneza 2019",
+    poster: "https://m.media-amazon.com/images/I/71igG2v8nCL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=zAGVQLHvwOY"
+  },
+  {
+    titulo: "Me Chame Pelo Seu Nome",
+    ano: 2017,
+    premio: "Oscar de Melhor Roteiro Adaptado 2018",
+    poster: "https://m.media-amazon.com/images/I/71iDZrW8WML._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=Z9AYPxH5NTM"
+  },
+  {
+    titulo: "Whiplash: Em Busca da Perfeição",
+    ano: 2014,
+    premio: "Oscar de Melhor Ator Coadjuvante 2015",
+    poster: "https://m.media-amazon.com/images/I/81bX5bq4eDL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=7d_jQycdQGo"
+  },
+  {
+    titulo: "Green Book: O Guia",
+    ano: 2018,
+    premio: "Oscar de Melhor Filme 2019",
+    poster: "https://m.media-amazon.com/images/I/81uFMCNjXbL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=Hzgzim5m7oU"
+  },
+  {
+    titulo: "Boyhood: Da Infância à Juventude",
+    ano: 2014,
+    premio: "Festival de Berlim - Urso de Ouro 2014",
+    poster: "https://m.media-amazon.com/images/I/71QF31VAY-L._AC_SY679_.jpg",
+    ondeAssistir: "MUBI Brasil",
+    trailer: "https://www.youtube.com/watch?v=YyKN0QE8wrg"
+  },
+  {
+    titulo: "O Artista",
+    ano: 2011,
+    premio: "Oscar de Melhor Filme 2012",
+    poster: "https://m.media-amazon.com/images/I/81RmlEhX+QL._AC_SY679_.jpg",
+    ondeAssistir: "Amazon Prime Video Brasil",
+    trailer: "https://www.youtube.com/watch?v=2S6Enn-ltYs"
+  },
+  {
+    titulo: "12 Anos de Escravidão",
+    ano: 2013,
+    premio: "Oscar de Melhor Filme 2014",
+    poster: "https://m.media-amazon.com/images/I/71FxZTtDcAL._AC_SY679_.jpg",
+    ondeAssistir: "Netflix Brasil",
+    trailer: "https://www.youtube.com/watch?v=J_6Z3xo4lRU"
+  },
+   {
+        titulo: "The Power of the Dog",
+        ano: 2021,
+        premio: "BAFTA de Melhor Direção 2022, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/71wZhyHgGbL._AC_SY679_.jpg",
+        ondeAssistir: "Netflix Brasil",
+        trailer: "https://www.youtube.com/watch?v=LRDPo0CHrko"
+      },
+      {
+        titulo: "Close",
+        ano: 2022,
+        premio: "Grande Prêmio do Júri - Festival de Cannes 2022, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/71H5Xf-jpQL._AC_SY679_.jpg",
+        ondeAssistir: "Now Brasil",
+        trailer: "https://www.youtube.com/watch?v=KrkF6NbibOI"
+      },
+      {
+        titulo: "Past Lives",
+        ano: 2023,
+        premio: "Indicado ao Oscar 2024, Sundance, Berlin",
+        poster: "https://m.media-amazon.com/images/I/71fv8ZRDnuL._AC_SY679_.jpg",
+        ondeAssistir: "Apple TV Brasil",
+        trailer: "https://www.youtube.com/watch?v=kA244xewjcI"
+      },
+      {
+        titulo: "American Fiction",
+        ano: 2023,
+        premio: "Oscar de Melhor Roteiro Adaptado 2024, TIFF People's Choice Award",
+        poster: "https://m.media-amazon.com/images/I/71uPv2C3U2L._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=uRP3tPXC8vU"
+      },
+      {
+        titulo: "Triangle of Sadness",
+        ano: 2022,
+        premio: "Palma de Ouro Cannes 2022, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/81fN3TYL2vL._AC_SY679_.jpg",
+        ondeAssistir: "HBO Max Brasil",
+        trailer: "https://www.youtube.com/watch?v=VDvfFIZQIuQ"
+      },
+      {
+        titulo: "Titane",
+        ano: 2021,
+        premio: "Palma de Ouro Cannes 2021",
+        poster: "https://m.media-amazon.com/images/I/81dvNSUxz0L._AC_SY679_.jpg",
+        ondeAssistir: "MUBI Brasil",
+        trailer: "https://www.youtube.com/watch?v=QkO0iA0wzOQ"
+      },
+      {
+        titulo: "Flee",
+        ano: 2021,
+        premio: "Indicado ao Oscar de Melhor Documentário, Animação e Filme Internacional",
+        poster: "https://m.media-amazon.com/images/I/81eVo9tPiDL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=WzUVeuWnVVM"
+      },
+      {
+        titulo: "Minari",
+        ano: 2020,
+        premio: "Globo de Ouro de Melhor Filme Estrangeiro 2021, Oscar de Melhor Atriz Coadjuvante",
+        poster: "https://m.media-amazon.com/images/I/91Qi0CuvYLL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=KQ0gFidlro8"
+      },
+      {
+        titulo: "The Father",
+        ano: 2020,
+        premio: "Oscar de Melhor Ator e Roteiro Adaptado 2021",
+        poster: "https://m.media-amazon.com/images/I/81d6jCDzxBL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=4TZb7YfK-JI"
+      },
+
+      {
+        titulo: "The Zone of Interest",
+        ano: 2023,
+        premio: "Grande Prêmio do Júri - Cannes 2023, Indicado ao Oscar 2024",
+        poster: "https://m.media-amazon.com/images/I/71CttvUKPYL._AC_SY679_.jpg",
+        ondeAssistir: "Em breve no streaming",
+        trailer: "https://www.youtube.com/watch?v=Z3QjY5MgqFw"
+       },
+      {
+        titulo: "Boyhood: Da Infância à Juventude",
+        ano: 2014,
+        premio: "Globo de Ouro de Melhor Filme 2015, BAFTA, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/81-4vYI50xL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=Ys-mbHXyWX4"
+      },
+      {
+        titulo: "O Lagosta",
+        ano: 2015,
+        premio: "Júri Cannes 2015, Indicado ao Oscar de Roteiro",
+        poster: "https://m.media-amazon.com/images/I/81XvqWta1DL._AC_SY679_.jpg",
+        ondeAssistir: "Apple TV Brasil",
+        trailer: "https://www.youtube.com/watch?v=vU29VfayDMw"
+      },
+      {
+        titulo: "Son of Saul",
+        ano: 2015,
+        premio: "Oscar de Melhor Filme Estrangeiro 2016, Cannes",
+        poster: "https://m.media-amazon.com/images/I/81P8RpyZCoL._AC_SY679_.jpg",
+        ondeAssistir: "Now Brasil",
+        trailer: "https://www.youtube.com/watch?v=2rK7mQ-6euI"
+      },
+      {
+        titulo: "Carol",
+        ano: 2015,
+        premio: "Festival de Cannes, Globo de Ouro, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/81KQyy6UNaL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=H4z7Px68ywk"
+      },
+      {
+        titulo: "Brooklyn",
+        ano: 2015,
+        premio: "BAFTA de Melhor Filme Britânico, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/91CXPb6vXxL._AC_SY679_.jpg",
+        ondeAssistir: "Star+ Brasil",
+        trailer: "https://www.youtube.com/watch?v=15syDwC000k"
+      },
+      {
+        titulo: "Whiplash",
+        ano: 2014,
+        premio: "Oscar de Melhor Ator Coadjuvante, Sundance",
+        poster: "https://m.media-amazon.com/images/I/81U0h0PqphL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=7d_jQycdQGo"
+      },
+      {
+        titulo: "A Grande Beleza",
+        ano: 2013,
+        premio: "Oscar de Melhor Filme Estrangeiro 2014, Cannes",
+        poster: "https://m.media-amazon.com/images/I/91kIU2t0h2L._AC_SY679_.jpg",
+        ondeAssistir: "Now Brasil",
+        trailer: "https://www.youtube.com/watch?v=tWhdbPZ8azg"
+      },
+      {
+        titulo: "A Separação",
+        ano: 2011,
+        premio: "Oscar de Melhor Filme Estrangeiro 2012, Urso de Ouro Berlim",
+        poster: "https://m.media-amazon.com/images/I/91HgLD6jWgL._AC_SY679_.jpg",
+        ondeAssistir: "MUBI Brasil",
+        trailer: "https://www.youtube.com/watch?v=6xB4biNdQ-s"
+      },
+      {
+        titulo: "Inside Llewyn Davis",
+        ano: 2013,
+        premio: "Grande Prêmio do Júri Cannes 2013, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/81UX6ogK20L._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=LFphYRyH7wc"
+      },
+      {
+        titulo: "Blue Is the Warmest Color",
+        ano: 2013,
+        premio: "Palma de Ouro Cannes 2013",
+        poster: "https://m.media-amazon.com/images/I/81TMT63xV2L._AC_SY679_.jpg",
+        ondeAssistir: "Now Brasil",
+        trailer: "https://www.youtube.com/watch?v=Y2OLRrocn3s"
+      },
+  {
+        "titulo": "Tudo em Todo Lugar ao Mesmo Tempo",
+        "ano": 2022,
+        "premio": "Oscar de Melhor Filme 2023",
+        "poster": "https://m.media-amazon.com/images/I/81JSuU0ya1L._AC_SY679_.jpg",
+        "ondeAssistir": "Amazon Prime Video Brasil",
+        "trailer": "https://www.youtube.com/watch?v=wxN1T1uxQ2g"
+    },
+    {
+        "titulo": "Oppenheimer",
+        "ano": 2023,
+        "premio": "Oscar de Melhor Filme 2024",
+        "poster": "https://m.media-amazon.com/images/I/81Y0x0sZtHL._AC_SY679_.jpg",
+        "ondeAssistir": "Apple TV (Aluguel)",
+        "trailer": "https://www.youtube.com/watch?v=uYPbbksJxIg"
+    },
+    {
+        "titulo": "Assassinos da Lua das Flores",
+        "ano": 2023,
+        "premio": "Indicado ao Oscar 2024",
+        "poster": "https://m.media-amazon.com/images/I/81u+4zcfKML._AC_SY679_.jpg",
+        "ondeAssistir": "Apple TV+ Brasil",
+        "trailer": "https://www.youtube.com/watch?v=EP34Yoxs3FQ"
+    },
+    {
+        "titulo": "Drive My Car",
+        "ano": 2021,
+        "premio": "Oscar de Melhor Filme Internacional 2022",
+        "poster": "https://m.media-amazon.com/images/I/71uSmRgPYrL._AC_SY679_.jpg",
+        "ondeAssistir": "MUBI Brasil",
+        "trailer": "https://www.youtube.com/watch?v=6BPKPb_RTwI"
+    },
+    {
+        "titulo": "Triângulo da Tristeza",
+        "ano": 2022,
+        "premio": "Palma de Ouro – Cannes 2022",
+        "poster": "https://m.media-amazon.com/images/I/71F9JgRxdtL._AC_SY679_.jpg",
+        "ondeAssistir": "Amazon Prime Video Brasil",
+        "trailer": "https://www.youtube.com/watch?v=VDvfFIZQIuQ"
+    },
+    {
+        "titulo": "Close",
+        "ano": 2022,
+        "premio": "Grand Prix – Cannes 2022",
+        "poster": "https://m.media-amazon.com/images/I/71ntHAXDHwL._AC_SY679_.jpg",
+        "ondeAssistir": "MUBI Brasil",
+        "trailer": "https://www.youtube.com/watch?v=Xc3uUOPmGYo"
+    },
+    {
+        "titulo": "Anatomia de uma Queda",
+        "ano": 2023,
+        "premio": "Palma de Ouro – Cannes 2023",
+        "poster": "https://m.media-amazon.com/images/I/71nl0p4TfHL._AC_SY679_.jpg",
+        "ondeAssistir": "Em breve nos cinemas do Brasil",
+        "trailer": "https://www.youtube.com/watch?v=nU5U_9bYb-M"
+    },
+    {
+        "titulo": "Aftersun",
+        "ano": 2022,
+        "premio": "Indicado ao Oscar de Melhor Ator 2023",
+        "poster": "https://m.media-amazon.com/images/I/71TQihplZDL._AC_SY679_.jpg",
+        "ondeAssistir": "MUBI Brasil",
+        "trailer": "https://www.youtube.com/watch?v=wvOXlW1M4vU"
+    },
+    {
+        "titulo": "Nomadland",
+        "ano": 2020,
+        "premio": "Oscar de Melhor Filme 2021",
+        "poster": "https://m.media-amazon.com/images/I/71aT9VpXM5L._AC_SY679_.jpg",
+        "ondeAssistir": "Star+ Brasil",
+        "trailer": "https://www.youtube.com/watch?v=6sxCFZ8_d84"
+    },
+    {
+        titulo: "Tár",
+        ano: 2022,
+        premio: "Festival de Veneza - Leão de Prata, Indicado ao Oscar 2023",
+        poster: "https://m.media-amazon.com/images/I/81c-VyhvEkL._AC_SY679_.jpg",
+        ondeAssistir: "Amazon Prime Video Brasil",
+        trailer: "https://www.youtube.com/watch?v=Na6gA1RehsU"
+      },
+    {
+        "titulo": "A Voz Suprema do Blues",
+        "ano": 2020,
+        "premio": "Oscar de Melhor Maquiagem 2021",
+        "poster": "https://m.media-amazon.com/images/I/81Lr8YiBuZL._AC_SY679_.jpg",
+        "ondeAssistir": "Netflix Brasil",
+        "trailer": "https://www.youtube.com/watch?v=A7pQpY7xE3Y"
+    },
+    {
+        titulo: "Os Banshees de Inisherin",
+        ano: 2022,
+        premio: "Globo de Ouro de Melhor Filme de Comédia ou Musical, Indicado ao Oscar",
+        poster: "https://m.media-amazon.com/images/I/91Ztz8oNspL._AC_SY679_.jpg",
+        ondeAssistir: "Star+ Brasil",
+        trailer: "https://www.youtube.com/watch?v=uRu3zLOJN2c"
+      },
+
+    ];
+
+    function sortearFilme() {
+      const index = Math.floor(Math.random() * filmes.length);
+      const filme = filmes[index];
+
+      document.getElementById("poster").src = filme.poster;
+      document.getElementById("poster").alt = `Poster do filme ${filme.titulo}`;
+      document.getElementById("titulo").textContent = filme.titulo;
+      document.getElementById("ano-premio").textContent = `${filme.ano} — ${filme.premio}`;
+      document.getElementById("onde-assistir").textContent = `Onde assistir: ${filme.ondeAssistir}`;
+      const trailerLink = document.getElementById("link-trailer");
+      trailerLink.href = filme.trailer;
+
+      document.getElementById("filme-sorteado").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
